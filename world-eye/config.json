@@ -1,0 +1,37 @@
+{
+  "port": 8790,
+  "gevUrl": "http://localhost:4173",
+  "defaultEngine": "antigravity",
+  "timeoutSec": 150,
+  "fallbackOnError": false,
+  "fallbackOrder": ["antigravity", "claude", "codex"],
+  "keepWorkFiles": false,
+  "engines": {
+    "antigravity": {
+      "label": "Antigravity CLI",
+      "bin": "agy",
+      "args": ["-p", "{prompt}", "--output-format", "json", "--print-timeout", "{timeoutSec}s"],
+      "extraArgs": []
+    },
+    "claude": {
+      "label": "Claude CLI",
+      "bin": "claude",
+      "args": ["-p", "{prompt}", "--output-format", "json", "--allowedTools", "Read"],
+      "extraArgs": []
+    },
+    "codex": {
+      "label": "Codex CLI",
+      "bin": "codex",
+      "args": [
+        "exec",
+        "--skip-git-repo-check",
+        "--sandbox", "read-only",
+        "--color", "never",
+        "--image", "{image}",
+        "--output-last-message", "{lastMessageFile}",
+        "{prompt}"
+      ],
+      "extraArgs": []
+    }
+  }
+}
